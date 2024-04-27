@@ -1,0 +1,5 @@
+<% if @category.errors.empty? %>
+  $("input#image_category_label").val("");
+  $("#image-categories-list").append("<%=j render partial: 'category', :content_type => 'text/html', :locals => { category: @category, animate: true, current_category: nil } %>");
+  $(".library .central_actions .count").html(<%= @settings.count_categories %>)
+<% end %>

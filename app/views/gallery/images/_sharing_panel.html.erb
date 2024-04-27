@@ -1,0 +1,40 @@
+<h2><%= t('settings.customer_img.content_for_title') %> / <%= @current_category.nil? ? t("gallery.imagecategories.index.unclassified") : @current_category.label %></h2>
+<div class="sharing-panel">
+  <ul class="sharing-menu">
+    <li>
+      <% url = ( @current_category ? new_gallery_image_path(image_category_id: @current_category.id) : new_gallery_image_path() ) %>
+      <%= link_to url, :class => "md-trigger", :remote => true, :"data-modal" => "import-elements", :"data-effect" => "effect-20", title: t(".import_images")  do %>
+        <%= image_tag("referential/import-pictures-icon.svg", :size => "35x35") %>
+        <span><%= t(".import_images") %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to confirm_move_gallery_images_path(current_category: @current_category.nil? ? "" : @current_category.id),
+                      :id     => 'move_children',
+                      :class  => 'md-trigger inactive_button',
+                      :remote => true,
+                      :data   => {
+                          :modal  => 'modal-move',
+                          :effect => 'effect-6',
+                          :class  => 'directory graph document'
+                      },
+                      :title => t('common.move_to') do %>
+        <%= image_tag 'referential/move-rep-show.svg', :size => '28x28' %>
+        <span><%= t 'common.move_to' %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to "#",
+                      :class  => 'md-trigger trash inactive_button',
+                      :remote => true,
+                      :data   => {
+                          :modal  => 'delete-selection',
+                          :effect => 'effect-1'
+                      },
+                      :title => t('common.move_to') do %>
+        <%= image_tag 'editor/tools-main/trash-can-icon-tool.svg', :size => '28x28' %>
+        <span><%= t 'common.delete' %></span>
+      <% end %>
+    </li>
+  </ul>
+</div>

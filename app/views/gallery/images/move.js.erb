@@ -1,0 +1,5 @@
+<% if @current_category.nil? %>
+  Turbolinks.visit("<%= gallery_imagecategories_path %>");
+<% else %>
+  Turbolinks.visit("<%= images_gallery_imagecategory_path(@current_category) %>");
+<% end %>

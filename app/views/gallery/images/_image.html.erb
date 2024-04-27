@@ -1,0 +1,19 @@
+<li class="product" data-image-id="<%= entity.id %>">
+  <div class="select-element"><input type="checkbox"/></div>
+  <div class="glb-icon">
+    <div class="glb-icon-inner">
+      <%= img_from_gallery_for(entity, { version: :show }) %>
+    </div>
+  </div>
+  <div class="reference_title">
+    <div class="item">
+      <p><%= entity.title %></p>
+    </div>
+    <div class="action_element">
+      <!-- <a href="#" class="edit_graph_image md-trigger" data-modal="edit-image-element" data-effect="splash-open"><%= t("common.edit") %></a> -->
+      <%= link_to crop_gallery_image_path(entity), remote: true, class: "md-trigger edit_graph_image", data: { modal: "edit-image-element", effect: "splash-open" } do %>
+        <%= t("common.edit") %>
+      <% end %>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,14 @@
+<div class="menu-library hide">
+  <ul class="area-list-tabs">
+    <li class="<%= 'active' if current_page == 'index' %>">
+      <%= link_to gallery_imagecategories_path do %>
+        <%= t(".tabs.customer") %>
+      <% end %>
+    </li>
+    <li class="<%= 'active' if current_page == 'user' %> hide">
+      <%= link_to user_gallery_images_path() do %>
+        <%= t(".tabs.user") %>
+      <% end %>
+    </li>
+  </ul>
+</div>

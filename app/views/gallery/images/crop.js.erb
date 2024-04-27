@@ -1,0 +1,3 @@
+$("#edit-image-element .form-container").html("");
+$("#edit-image-element .form-container").append("<%=j render partial: 'gallery/images/form_crop', locals: { graph_image: @graph_image }, :content_type => 'text/html' %>");
+explorer.Gallery.instance.initImageCropper();

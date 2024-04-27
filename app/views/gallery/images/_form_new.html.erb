@@ -1,0 +1,31 @@
+<% url = ( @category ? gallery_images_path(image_category_id: @category.id) : gallery_images_path() ) %>
+<div>
+  <h4><%= t(".title") %><input type="reset" class="right reset md-close" value="<%=t 'common.close' %>"></h4>
+  <p class="tips"><%= t(".tips") %></p>
+  <%= form_for @settings, url: url, method: :post, :html => {:multipart => true, :id => "new_graph_image", class: "mod-form"}, :remote => true do |f| %>
+  <div>
+    <%= f.file_field :graph_images, type: :file, multiple: true, style: "display: none;" %>
+    <div class="upload-zone" id="upload-zone">
+      <p><%= t(".drop_zone") %></p>
+    </div>
+    <div id="progress">
+      <div class="bar" style="width: 0%;"></div>
+    </div>
+  </div>
+  <div>
+    <div class="error-messages" style="display:none;">
+      <ul class="list_with_errors">
+      </ul>
+    </div>
+  </div>
+  <div>
+    <ul class="celled list selection">
+    </ul>
+  </div>
+  <div class="mod-submit-wrap">
+    <%= f.submit t('common.download'), :class => "mod-submit", :title => t('common.download'), :disabled => true %>
+    <span><%=t 'common.or' %></span>
+    <input type="reset" class="reset md-close" value="<%=t 'common.cancel' %>"></input>
+  </div>
+  <% end %>
+</div>

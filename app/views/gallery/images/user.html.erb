@@ -1,0 +1,13 @@
+<% content_for :title, t('settings.customer_img.content_for_title') %>
+<% content_for :sharing_panel do %>
+  <%= render 'sharing_panel' %>
+<% end %>
+
+<% content_for :content_class, "no-overflow" %>
+
+<div class="library">
+  <div class="inner-content">
+    <%= render partial: 'sharing_tabs', locals: {current_page: 'user'} %>
+    <%= render partial: 'user' %>
+  </div>
+</div>

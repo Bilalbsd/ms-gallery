@@ -1,0 +1,4 @@
+$("ul.products_image").html('')
+<% @images.each do |image| %>
+  $("ul.products_image").append("<%=j render partial: 'gallery/images/image', locals: { entity: image } %>")
+<% end %>

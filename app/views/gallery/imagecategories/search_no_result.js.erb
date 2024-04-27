@@ -1,0 +1,2 @@
+$('ul.products_image').html('')
+$('<li>', {text: "<%= raw t('.no_result', {term: @term}) %>", class: 'no-result'}).appendTo($('ul.products_image'))

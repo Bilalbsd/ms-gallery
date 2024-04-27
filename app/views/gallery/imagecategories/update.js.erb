@@ -1,0 +1,8 @@
+<% if @category.errors.empty? %>
+  var li_node = $("#image-categories-list li#image_category_<%= @category.id %>");
+  var is_current_category = li_node.hasClass("current_category");
+  var new_node = $("#image-categories-list li#image_category_<%= @category.id %>").replaceWith("<%=j render partial: 'category', :content_type => 'text/html', :locals => { category: @category, animate: true, current_category: nil } %>");
+  if(is_current_category) {
+    $(new_node.selector).addClass("current_category");
+  }
+<% end %>

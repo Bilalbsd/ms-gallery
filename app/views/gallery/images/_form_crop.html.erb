@@ -1,0 +1,48 @@
+<%= form_for(graph_image, :url => gallery_image_path(graph_image), html: {class: "mod-form"}, remote: true) do |f| %>
+<div class="row">
+  <div class="span7 span-md-7 span-lg-7 span-xs-12">
+    <label><%= t(".crop.title") %></label>
+    <p class="tips"><%= t(".crop.tips") %></p>
+    <div id="customer-block-logos" class="picture-support">
+      <!-- <div class="logo-preview">
+        <div class="logo-inner-preview">
+          <%#= img_from_gallery_for(graph_image, { version: :preview, :id => "logo-preview" } ) %>
+        </div>
+      </div> -->
+      <%= img_from_gallery_for(graph_image, { version: :preview, :id => "cropbox" } ) %>
+    </div>
+  </div>
+  <div class="span5 span-md-5 span-lg-5 span-xs-12">
+    <div class="row">
+      <div class="span12 span-md-12 span-lg-12 span-xs-12">
+        <label><%= t(".img_title") %></label>
+        <h4 class="enhanced"><%= t('.title') %></h4>
+        <%= f.text_field :title %>
+        <%= f.hidden_field :crop_x %>
+        <%= f.hidden_field :crop_y %>
+        <%= f.hidden_field :crop_w %>
+        <%= f.hidden_field :crop_h %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12 span-md-12 span-lg-12 span-xs-12">
+        <div class="secondary-section">
+          <h4 class="enhanced"><%= t(".image_graphs") %>&nbsp;:&nbsp;</h4>
+          <%=render 'shared/linked_graphs', linked_graphs: graph_image.linked_graphs %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="span12 span-md-12 span-lg-12 span-xs-12">
+    <div class="mod-submit-wrap">
+      <%= f.submit t('common.modify'), :class => "mod-submit", :title => t('common.modify') %>
+      <span><%=t 'common.or' %></span>
+      <input type="reset" value="<%=t 'common.cancel' %>" class="reset md-close">
+    </div>
+  </div>
+</div>
+<% end %>

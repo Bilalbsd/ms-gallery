@@ -1,0 +1,6 @@
+<% categories.each do |category| %>
+  <li class="<%= category.id == current_category.to_i ? "disabled" : "" %>" >
+    <label for="tree view" id="<%= category.id %>"><%= category.label %></label>
+    <input type="checkbox" checked="" class="toggling">
+  </li>
+<% end %>

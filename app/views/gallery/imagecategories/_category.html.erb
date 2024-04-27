@@ -1,0 +1,32 @@
+<% animate ||= false %>
+<li class="menu__item <%= animate ? ((action_name == 'create') ? 'new-item' : 'new-item') : '' %> <%= 'current_category' if category == current_category %>" id="image_category_<%= category.id %>">
+  <%= link_to images_gallery_imagecategory_path(category), class: "menu__link category-show-mode" do %>
+    <span><%= category.label %></span>
+  <% end %>
+  <div class="category-edit-container category-edit-mode hide">
+    <%= form_for category, url: gallery_imagecategory_path(category), remote: true, method: :patch do |f| %>
+      <%= image_tag "referential/file-directory.svg", class: "image_category" %>
+      <%= f.text_field :label, id: "" %>
+      <div class="call_to_act">
+        <%= content_tag :button, :type => :submit, :class => "action-category", title: t("common.update") do %>
+          <%= image_tag('referential/valid-icon.svg', :size => '20x20') %>
+        <% end %>
+        <%= content_tag :button, :type => :reset, :class => "action-category", title: t("common.cancel") do %>
+          <%= image_tag('referential/cancel-icon.svg', :size => '20x20') %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="call_to_act category-show-mode">
+    <div class="edit-category action-category">
+      <button class="edit-button" id="switch-to-edit-category"><%= image_tag('referential/edit-icon.svg', :size => '20x20', title: t("common.edit")) %></button>
+    </div>
+    <div class="trash-category action-category">
+      <%= form_for category, url: gallery_imagecategory_path(category), method: :delete, remote: true do |f| %>
+        <% content_tag :button, :type => :submit, :class => "delete-button" do %>
+          <%= image_tag('referential/trash-icon.svg', :size => '20x20', title: t("common.delete")) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,26 @@
+<% content_for :title, t('settings.customer_img.content_for_title') %>
+<% content_for :sharing_panel do %>
+  <%= render 'gallery/images/sharing_panel' %>
+<% end %>
+
+<% content_for :content_class, "no-overflow" %>
+
+<div class="library animated fadeIn">
+  <div class="inner-content">
+    <%= render partial: 'gallery/images/sharing_tabs', locals: {current_page: 'index'} %>
+    <%= render partial: 'gallery/images/index' %>
+  </div>
+</div>
+
+<% content_for :modals do %>
+  <!-- import images -->
+  <%= render partial: 'layouts/import_attachment_modal'%>
+
+  <!-- delete modal -->
+  <%= render partial: 'gallery/images/confirm_destroy' %>
+
+  <!-- move images within categories -->
+  <%= render partial: 'gallery/images/confirm_move' %>
+  <!-- edit image -->
+  <%= render partial: "gallery/images/edit_image" %>
+<% end %>

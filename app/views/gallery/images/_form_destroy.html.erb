@@ -1,0 +1,8 @@
+<%= form_tag destroy_all_gallery_images_path, method: :put, remote: true, class: "mod-form md-keep-form" do %>
+  <%= hidden_field_tag :image_ids %>
+  <div class="mod-submit-wrap">
+    <%= submit_tag t("common.delete"), class: "mod-submit" %>
+    <span><%= t("common.or") %></span>
+    <input type="reset" class="reset md-close" value="<%=t 'common.cancel' %>"></input>
+  </div>
+<% end %>

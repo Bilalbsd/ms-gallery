@@ -1,0 +1,7 @@
+$('#modal-move .container-tree ol.tree').html("");
+$('#modal-move .md-content').find('form').remove();
+$('#modal-move .container-tree ol.tree')
+    .append("<%=j render :partial => 'list_of_categories_for_md_move', :content_type => 'text/html', locals: { categories: @categories, current_category: @current_category } %>");
+
+$('#modal-move .md-content div:first')
+  .append("<%=j render :partial => 'gallery/images/form_move', :content_type => 'text/html' %>");

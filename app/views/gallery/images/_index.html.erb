@@ -1,0 +1,80 @@
+<% scope = "gallery.imagecategories.index" %>
+<div id="ml-menu" class="menu">
+  <div class="menu__wrap">
+    <div class="central_actions">
+      <div class="row">
+        <div class="span12 span-md-12 span-lg-12 span-xs-12">
+          <p><%= t("#{scope}.nb_categories") %>&nbsp;:&nbsp;<span class="count"><%= @settings.count_categories %></span></p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <%= form_for @new_category, url: gallery_imagecategories_path, method: :post, remote: true do |f| %>
+          <div class="span12 span-md-12 span-lg-12 span-xs-12">
+            <div class="field">
+              <%= f.text_field :label %>
+              <%= f.submit t("common.add") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
+    <ul data-menu="main" class="menu__level" id="image-categories-list">
+      <li class="menu__item <%= 'current_category' if (@current_category.nil? && @all) %>">
+        <%= link_to gallery_imagecategories_path({category: 'all'}), class: "menu__link"  do %>
+          <%= t("#{scope}.all") %>
+        <% end %>
+      </li>
+      <li class="menu__item <%= 'current_category' if (@current_category.nil? && !@all) %>">
+        <%= link_to gallery_imagecategories_path, class: "menu__link"  do %>
+          <%= t("#{scope}.unclassified") %>
+        <% end %>
+      </li>
+      <% @categories.each do |category| %>
+        <%= render partial: "gallery/imagecategories/category", locals: { category: category, animate: false, current_category: @current_category } %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="content_library">
+  <div class="search-blk">
+    <div class="row-fluid">
+      <div class="span12 span-md-12 span-lg-12 span-xs-12">
+        <%= form_tag search_gallery_imagecategory_path(@current_category.nil? ? 0 : @current_category, all: @all), method: :post, class: "search-form", remote: true do %>
+          <div class="row">
+            <div class="span12">
+              <div class="field">
+                <div class="row">
+                  <div class="span5">
+                    <%= text_field_tag(:term, params[:term], placeholder: t('.search_placeholder'), autocomplete: 'off', class: "search-field") %>
+                    <div class="validate-blk">
+                      <%= submit_tag '', class:'btn btn--tiny', title: t('.search_submit') %>
+                      <input type="reset" value="" title="<%= t('.search_reset') %>" class = 'btn btn--tiny' />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="partial_content">
+    <ul class="products_image items-container">
+      <% if @current_category.nil? && @all %>
+        <% @settings.graph_images.all.each do |entity| %>
+          <%= render partial: "gallery/images/image", locals: { entity: entity } %>
+        <% end %>
+      <% elsif @current_category.nil? && !@all %>
+        <% @settings.graph_images.unclassified_images.each do |entity| %>
+          <%= render partial: "gallery/images/image", locals: { entity: entity } %>
+        <% end %>
+      <% else %>
+        <% @current_category.graph_images.each do |entity| %>
+          <%= render partial: "gallery/images/image", locals: { entity: entity } %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
